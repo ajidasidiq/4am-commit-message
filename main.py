@@ -39,6 +39,13 @@ def main() -> int:
     if any(ord(ch) < 32 for ch in text):
         print("entry must not contain control characters", file=sys.stderr)
         return 1
+    if not text.isprintable():
+        print(
+            "entry must contain only printable characters "
+            "(no DEL or other non-printable characters)",
+            file=sys.stderr,
+        )
+        return 1
     if len(text.splitlines()) != 1:
         print("entry must be a single line", file=sys.stderr)
         return 1
